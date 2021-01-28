@@ -1,0 +1,12 @@
+- hosts: localhost
+  become: true
+
+  vars:
+    username: "{{ lookup('env', 'USER') }}"
+    userhome: "/home/{{ username }}"
+
+  tasks:
+  - include: tasks/configure-user.yaml
+  - include: tasks/configure-packages.yaml
+  - include: tasks/configure-i3.yaml
+  - include: tasks/configure-asdf.yaml

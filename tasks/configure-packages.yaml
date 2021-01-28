@@ -1,0 +1,57 @@
+- name: Package Installation - Update Pacman package cache
+  pacman:
+    update_cache: true
+  changed_when: false
+
+- name: Package Installation
+  package:
+    name: [
+        'gnome-terminal',
+        'tldr',
+        'bat',
+        'exa',
+        'htop',
+        'prettyping',
+        'fd',
+        'ncdu',
+        'xclip',
+        'fzf',
+        'emacs',
+        'binutils',
+        'ffmpeg',
+        'imagemagick',
+        'rofi',
+        'nitrogen',
+        'dunst',
+        'i3blocks',
+        'i3-gaps',
+        'i3lock',
+        'i3status',
+        'git',
+        'curl',
+        'tmux',
+        'pavucontrol',
+        'base-devel',
+        'libffi', 
+        'libyaml',
+        'openssl',
+        'zlib'
+    ]
+    state: present
+
+- name: User Configuration - Create {{ userhome }}/lib directory
+  become_user: "{{ username }}"
+  file:
+    path: "{{ userhome }}/lib"
+    state: directory
+
+
+- name: Antigen Installation
+  get_url:
+    url: 'https://raw.githubusercontent.com/zsh-users/antigen/master/bin/antigen.zsh'
+    dest: '{{ userhome }}/lib/antigen.zsh'
+
+- name: PlantUML Installation
+  get_url:
+    url: 'https://versaweb.dl.sourceforge.net/project/plantuml/plantuml.jar'
+    dest: '{{ userhome }}/lib/plantuml.jar'

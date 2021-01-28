@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -eof pipefail
+
+ansible-galaxy install cimon-io.asdf
+ansible-playbook -i ansible.cfg setup.yaml --ask-become-pass

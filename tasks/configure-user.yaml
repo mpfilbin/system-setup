@@ -1,0 +1,31 @@
+- name: User Configuration - Add sudoers entry for "{{ username }}"
+  lineinfile:
+    path: "/etc/sudoers.d/{{ username }}"
+    line: "{{ username }} ALL=(ALL) NOPASSWD: ALL"
+    create: yes
+    mode: "0640"
+
+- name: User Configuration - Copy tmux configuration
+  copy:
+    src: "files/configuration/tmux/tmux.conf"
+    dest: "{{ userhome }}/.tmux.conf"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: User Configuration - Create home/bin directory
+  become_user: "{{ username }}"
+  file:
+    path: "{{ userhome }}/lib"
+    state: directory
+
+- name: User Configuration - Copy ZSH configuration
+  copy:
+    src: "files/configuration/zsh/zshrc"
+    dest: "{{ userhome }}/.zshrc"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: User Configuration - Copy p10k Configuration
+  copy:
+    src: "files/configuration/zsh/p10k.zsh"
+    dest: "{{ userhome }}/.p10k.zsh"

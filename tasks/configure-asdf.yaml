@@ -1,0 +1,35 @@
+- name: 'Install asdf version manager'
+  become: true
+  vars:
+    asdf_user: "{{ username }}"
+    asdf_version: v0.8.0
+    asdf_plugins:
+      - name: shfmt
+        versions:
+          - 3.2.1
+      - name: shellcheck
+        versions:
+          - 0.7.1
+      - name: shellspec
+        versions:
+          - 0.28.1
+      - name: nodejs
+        versions:
+          - 14.15.2
+      - name: yarn
+        versions:
+          - 1.22.10
+      - name: ruby
+        versions:
+          - 3.0.0
+      - name: java
+        versions:
+          - zulu-15.28.51
+      - name: clojure
+        versions:
+          - 1.10.1.739
+      - name: crystal
+        versions:
+          - 0.35.1
+  roles:
+    - asdf
